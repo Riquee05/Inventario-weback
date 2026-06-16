@@ -1,0 +1,16 @@
+{
+  "name": "Inventário TI",
+  "short_name": "Inventário",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0f4c81",
+  "theme_color": "#0f4c81",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ]
+}
