@@ -1,4 +1,5 @@
-alert("JS carregou");
+document.body.style.background = "red";
+alert("APP JS ESTÁ RODANDO");
 // =====================================================
 // USUÁRIO (MULTIUSUÁRIO BASE)
 // =====================================================
