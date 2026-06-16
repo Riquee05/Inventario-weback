@@ -72,9 +72,55 @@ const readerElement = document.getElementById("reader");
 
 let html5QrCode = null;
 let scannerAtivo = false;
-let ultimoCodigo = "";
-let lock = false;
-let timeoutReset = null;
+let iniciando = false;
+
+async function iniciarScanner() {
+
+    if (scannerAtivo || iniciando) return;
+
+    iniciando = true;
+
+    try {
+
+        html5QrCode = new Html5Qrcode("reader");
+
+        await html5QrCode.start(
+            { facingMode: "environment" },
+            {
+                fps: 10,
+                qrbox: 250
+            },
+            onScanSuccess,
+            onScanError
+        );
+
+        scannerAtivo = true;
+
+    } catch (err) {
+        console.error("Erro câmera:", err);
+    }
+
+    iniciando = false;
+}
+
+async function pararScanner() {
+
+    if (!scannerAtivo || iniciando) return;
+
+    iniciando = true;
+
+    try {
+        await html5QrCode.stop();
+        await html5QrCode.clear();
+    } catch (e) {
+        console.warn("Stop ignorado:", e);
+    }
+
+    scannerAtivo = false;
+    iniciando = false;
+
+    document.getElementById("reader").innerHTML = "";
+}
 
 // =====================================================
 // SALVAR LOCAL (OFFLINE)
